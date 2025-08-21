@@ -1,0 +1,38 @@
+name: Build release binaries
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  compile:
+    name: ${{ matrix.binaries }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        binaries:
+          [
+            linux-amd64,
+            linux-arm64,
+            darwin-amd64,
+            darwin-arm64,
+            windows-amd64,
+            windows-arm64,
+          ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.25
+      - name: Compile application
+        run: |
+          make clean
+          make build TARGET=${{ matrix.binaries }}
+      - name: Upload binary to GitHub Release (official CLI)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" dist/cloudflare-ddns-${{ matrix.binaries }}* --clobber
