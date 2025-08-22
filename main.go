@@ -62,6 +62,7 @@ func runDDNS(apiToken, zoneID, host string, updateIPv4, updateIPv6 bool, lastIPv
 			return
 		}
 		if currentIP == *lastObserved {
+			log.Printf("%s unchanged (%s)", label, currentIP)
 			return
 		}
 		*lastObserved = currentIP

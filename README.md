@@ -9,6 +9,22 @@ Highlights
 
 ## Quick start
 
+Download the latest binary from GitHub Releases, or build it yourself.
+
+Example on how to download the latest Linux ARM64 binary:
+
+```bash
+curl -fsSL -o cloudflare-ddns \
+	https://github.com/josecfreittas/cloudflare-ddns/releases/latest/download/cloudflare-ddns-linux-arm64
+chmod +x cloudflare-ddns
+```
+
+You can check all available binaries in the [Releases](https://github.com/josecfreittas/cloudflare-ddns/releases) page.
+
+
+
+With the binary ready, set the required environment variables and run it.
+
 One-time update (runs and exits):
 
 ```bash
@@ -28,6 +44,11 @@ Enable IPv6 updates (AAAA) alongside IPv4:
 
 ```bash
 ./cloudflare-ddns -ipv6=true -duration 1h
+```
+
+If you want to run it in the background, you can do something like this:
+```bash
+nohup ./cloudflare-ddns -duration 1h > cloudflare-ddns.log 2>&1 &
 ```
 
 Notes
