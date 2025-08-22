@@ -48,7 +48,7 @@ Enable IPv6 updates (AAAA) alongside IPv4:
 
 If you want to run it in the background, you can do something like this:
 ```bash
-nohup ./cloudflare-ddns -duration 1h > cloudflare-ddns.log 2>&1 &
+nohup ./cloudflare-ddns -ipv6=true -duration 1h > cloudflare-ddns.log 2>&1 &
 ```
 
 Notes
